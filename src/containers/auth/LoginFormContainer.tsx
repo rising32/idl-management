@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { SubmitHandler } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import LoginForm, { LoginFormType } from '../../components/auth/LoginForm';
-import { sendLogin } from '../../lib/api';
+import { sendCompanyInfo, sendLogin, sendSetting } from '../../lib/api';
 import useRequest from '../../lib/hooks/useRequest';
 import { validateEmail } from '../../lib/utils';
 import { ErrorResponse } from '../../lib/utils/errorTypes';
 import { useAppDispatch } from '../../store';
-import { setUser } from '../../store/features/coreSlice';
+import { setCompanyInfo } from '../../store/features/companySlice';
+import { setSetting, setUser } from '../../store/features/coreSlice';
 
 function LoginFormContainer() {
   const [error, setError] = useState<null | string>(null);
@@ -16,21 +17,13 @@ function LoginFormContainer() {
   const dipatch = useAppDispatch();
 
   const [_sendLogin, , sendLoginRes, sendLoginError] = useRequest(sendLogin);
+  const [_sendSetting, , sendSettingRes] = useRequest(sendSetting);
+  const [_sendCompanyInfo, , sendCompanyInfoRes] = useRequest(sendCompanyInfo);
 
   const onSubmit: SubmitHandler<LoginFormType> = data => {
     setError(null);
-    const validation = {
-      password: (text: string) => {
-        if (text === '') {
-          return 'Password is empty!.';
-        }
-        if (text.length < 6) {
-          return 'Password length is min 6 letters';
-        }
-      },
-    };
 
-    const error = validation.password(data.password) || validateEmail(data.email) || null;
+    const error = validateEmail(data.email) || null;
 
     if (error) {
       setError(error);
@@ -45,9 +38,9 @@ function LoginFormContainer() {
 
   useEffect(() => {
     if (sendLoginRes) {
-      console.log(sendLoginRes);
       dipatch(setUser(sendLoginRes));
-      navigate('/tasks');
+      _sendSetting({ user_id: sendLoginRes.user.user_id });
+      _sendCompanyInfo({ user_id: sendLoginRes.user.user_id });
     }
   }, [sendLoginRes, dipatch, navigate]);
   useEffect(() => {
@@ -56,6 +49,21 @@ function LoginFormContainer() {
       setError(data.errors ? data.errors[0] : data.errorMessage);
     }
   }, [sendLoginError]);
+  useEffect(() => {
+    if (sendSettingRes) {
+      dipatch(setSetting(sendSettingRes));
+    }
+  }, [sendSettingRes]);
+  useEffect(() => {
+    if (sendCompanyInfoRes) {
+      dipatch(setCompanyInfo(sendCompanyInfoRes));
+    }
+  }, [sendCompanyInfoRes]);
+  useEffect(() => {
+    if (sendSettingRes && sendCompanyInfoRes) {
+      navigate('/tasks');
+    }
+  }, [sendSettingRes, sendCompanyInfoRes]);
   return <LoginForm onSubmit={onSubmit} error={error} />;
 }
 

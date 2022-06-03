@@ -1,8 +1,11 @@
 export interface UserInfoState {
-  id: string;
-  display_name: string;
+  user_id: number;
   email: string;
-  phone: string;
-  role: string;
-  thumbnail: string | null;
+  phone_number: string;
+  display_name: string;
+  password: string;
+  avatar?: string;
+  birthday?: string;
+  role_id: number;
+  registration_time?: string;
 }
