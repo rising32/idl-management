@@ -16,6 +16,7 @@ const initialState: CoreState = {
     currency: 0,
     decimal_seperator: 0,
   },
+  local: 'fr',
   popup: {
     visible: false,
     title: '',

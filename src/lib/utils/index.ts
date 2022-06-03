@@ -1,4 +1,5 @@
-import { addWeeks, getWeek, getYear, startOfWeek, startOfYear } from 'date-fns';
+import { addWeeks, format, getWeek, getYear, startOfWeek, startOfYear } from 'date-fns';
+import { fr, enUS } from 'date-fns/locale';
 
 export function validateEmail(email: string) {
   const re =
@@ -35,4 +36,40 @@ export function getShortName(name: string) {
     .map(x => x[0].toUpperCase())
     .join('');
   return short;
+}
+
+export function getLocalMonthList(locale: string) {
+  let req = fr;
+  if (locale === 'fr') {
+    req = fr;
+  } else {
+    req = enUS;
+  }
+  const months = [];
+  for (let i = 0; i < 12; i++) {
+    months.push(req.localize?.month(i));
+  }
+  return months;
+}
+export function getNickName(name: string) {
+  const short = name
+    .split(' ')
+    .map((value, index) => {
+      if (index === 0) {
+        return !value ? '' : value[1] ? value[0].toUpperCase() + value[1].toUpperCase() : value[0].toUpperCase();
+      } else if (index === 1) {
+        return value ? value[0].toUpperCase() : '';
+      }
+    })
+    .join('');
+  return short;
+}
+export function getFormatDate(date: Date, locale: string) {
+  let req = fr;
+  if (locale === 'fr') {
+    req = fr;
+  } else {
+    req = enUS;
+  }
+  return format(date, 'yyyy-MM-dd', { locale: req });
 }

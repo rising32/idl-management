@@ -8,6 +8,7 @@ function EditProfileContainer() {
 
   const onSubmit: SubmitHandler<ProfileFormType> = data => {
     setError(null);
+    console.log(data);
   };
   return (
     <div className='grid gap-4'>

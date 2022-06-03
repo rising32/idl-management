@@ -4,11 +4,12 @@ import { ToastContainer } from 'react-toastify';
 import { injectStyle } from 'react-toastify/dist/inject-style';
 import OpaqueLayer from '../../components/common/OpaqueLayer';
 import { RootState } from '../../store';
+import ReactModal from 'react-modal';
 
 if (typeof window !== 'undefined') {
   injectStyle();
 }
-
+ReactModal.setAppElement('#root');
 const Core = () => {
   const { layer } = useSelector((state: RootState) => state.core);
   return (
