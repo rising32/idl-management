@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Controller, useForm, SubmitHandler } from 'react-hook-form';
+import { PlusSvg } from '../../assets/svg';
 import { getLocalDataString } from '../../lib/utils';
 import WeekDayCalendar from '../calendar/WeekDayCalendar';
-import PlusIcon from '../common/PlusIcon';
 import RoundedView from '../common/RoundedView';
 
 export type TaskFormType = {
@@ -35,7 +35,7 @@ function TaskForm() {
       </div>
 
       <RoundedView className='border-2 border-rouge bg-gray'>
-        <form onSubmit={handleSubmit(onSubmit)} className='text-white grid gap-4 mt-4'>
+        <form onSubmit={handleSubmit(onSubmit)} className='text-white grid gap-4 mt-4 pb-12 relative'>
           <div className='font-bold text-center'>Task with your account</div>
           {/* <Controller
             control={control}
@@ -61,8 +61,11 @@ function TaskForm() {
               />
             )}
           /> */}
-          <button type='submit'>
-            <PlusIcon className='flex items-center justify-end my-4' />
+          <button
+            type='submit'
+            className='bg-white w-8 h-8 rounded-full shadow-xl items-center justify-center flex absolute bottom-4 right-4'
+          >
+            <PlusSvg className='w-6 h-6 text-rouge' />
           </button>
         </form>
       </RoundedView>
