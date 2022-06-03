@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { RotatingLines } from 'react-loader-spinner';
 
 interface OpaqueLayerProps {
   visible: boolean;
@@ -10,12 +11,9 @@ function OpaqueLayer({ visible }: OpaqueLayerProps) {
   const mounted = useRef(false);
   const [closed, setClosed] = useState(true);
 
-  // activates animation & hides and unhides scrollbar
   useEffect(() => {
-    // scrollbar
     document.body.style.overflowY = visible ? 'hidden' : 'initial';
 
-    // animate
     if (!mounted.current) {
       mounted.current = true;
     } else {
@@ -25,7 +23,7 @@ function OpaqueLayer({ visible }: OpaqueLayerProps) {
         if (!visible) {
           setClosed(true);
         }
-      }, 250);
+      }, 50);
     }
 
     if (visible) {
@@ -48,10 +46,12 @@ function OpaqueLayer({ visible }: OpaqueLayerProps) {
 
   return (
     <div
-      className={`fixed top-0 left-0 w-screen h-screen bg-white opacity-50 z-10 ${
+      className={`fixed top-0 left-0 w-screen flex h-screen bg-black items-center justify-center opacity-50 z-10 ${
         visible ? 'ease-in duration-200' : 'ease-out duration-200'
       }`}
-    />
+    >
+      <RotatingLines width='30' strokeColor='white' />
+    </div>
   );
 }
 

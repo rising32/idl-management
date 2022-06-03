@@ -8,7 +8,7 @@ import { validateEmail } from '../../lib/utils';
 import { ErrorResponse } from '../../lib/utils/errorTypes';
 import { useAppDispatch } from '../../store';
 import { setCompanyInfo } from '../../store/features/companySlice';
-import { setSetting, setUser } from '../../store/features/coreSlice';
+import { setLayer, setSetting, setUser } from '../../store/features/coreSlice';
 
 function LoginFormContainer() {
   const [error, setError] = useState<null | string>(null);
@@ -29,6 +29,7 @@ function LoginFormContainer() {
       setError(error);
       return;
     }
+    dipatch(setLayer(true));
     const params = {
       email: data.email,
       password: data.password,
@@ -42,7 +43,7 @@ function LoginFormContainer() {
       _sendSetting({ user_id: sendLoginRes.user.user_id });
       _sendCompanyInfo({ user_id: sendLoginRes.user.user_id });
     }
-  }, [sendLoginRes, dipatch, navigate]);
+  }, [sendLoginRes, dipatch, navigate, _sendSetting, _sendCompanyInfo]);
   useEffect(() => {
     if (sendLoginError) {
       const data = sendLoginError?.response?.data as ErrorResponse;
@@ -53,17 +54,18 @@ function LoginFormContainer() {
     if (sendSettingRes) {
       dipatch(setSetting(sendSettingRes));
     }
-  }, [sendSettingRes]);
+  }, [sendSettingRes, dipatch]);
   useEffect(() => {
     if (sendCompanyInfoRes) {
       dipatch(setCompanyInfo(sendCompanyInfoRes));
     }
-  }, [sendCompanyInfoRes]);
+  }, [sendCompanyInfoRes, dipatch]);
   useEffect(() => {
     if (sendSettingRes && sendCompanyInfoRes) {
       navigate('/tasks');
+      dipatch(setLayer(false));
     }
-  }, [sendSettingRes, sendCompanyInfoRes]);
+  }, [sendSettingRes, sendCompanyInfoRes, navigate]);
   return <LoginForm onSubmit={onSubmit} error={error} />;
 }
 
