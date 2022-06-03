@@ -17,12 +17,12 @@ export const companySlice = createSlice({
   reducers: {
     setCompanyInfo: (state, action) => {
       state.admin_info = action.payload.company.admin_info;
-      state.client_count = action.payload.company.client_count;
-      state.company_id = action.payload.company.company_id;
-      state.company_name = action.payload.company.company_name;
-      state.member_count = action.payload.company.member_count;
-      state.project_count = action.payload.company.project_count;
-      state.task_count = action.payload.company.task_count;
+      state.client_count = action.payload.company.client_count || 0;
+      state.company_id = action.payload.company.company_id || 0;
+      state.company_name = action.payload.company.company_name || 'Default';
+      state.member_count = action.payload.company.member_count || 0;
+      state.project_count = action.payload.company.project_count || 0;
+      state.task_count = action.payload.company.task_count || 0;
     },
     updateCompanyName: (state, action) => {
       state.company_name = action.payload.company_name;
