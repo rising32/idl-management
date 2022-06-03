@@ -1,5 +1,4 @@
 import React from 'react';
-import { ForwardSvg } from '../../assets/svg';
 
 interface Props {
   children: React.ReactNode;

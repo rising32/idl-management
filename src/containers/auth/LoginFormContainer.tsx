@@ -65,7 +65,7 @@ function LoginFormContainer() {
       navigate('/tasks');
       dipatch(setLayer(false));
     }
-  }, [sendSettingRes, sendCompanyInfoRes, navigate]);
+  }, [sendSettingRes, sendCompanyInfoRes, dipatch, navigate]);
   return <LoginForm onSubmit={onSubmit} error={error} />;
 }
 
