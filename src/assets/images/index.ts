@@ -1,0 +1,13 @@
+export { default as accountActiveThumbnail } from './account_active.png';
+export { default as accountInactiveThumbnail } from './account_inactive.png';
+export { default as deliverableActiveThumbnail } from './deliverable_active.png';
+export { default as deliverableInactiveThumbnail } from './deliverable_inactive.png';
+export { default as logoThumbnail } from './logo.png';
+export { default as prioritiesActiveThumbnail } from './priorities_active.png';
+export { default as prioritiesInactiveThumbnail } from './priorities_inactive.png';
+export { default as tasksActiveThumbnail } from './tasks_active.png';
+export { default as tasksInactiveThumbnail } from './tasks_inactive.png';
+export { default as statisticsActiveThumbnail } from './statistics_active.png';
+export { default as statisticsInactiveThumbnail } from './statistics_inactive.png';
+export { default as documentThumbnail } from './document.png';
+export { default as redDocumentThumbnail } from './red-document.png';
