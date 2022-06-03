@@ -5,6 +5,7 @@ import AuthenticatedRoute from './AuthenticatedRoute';
 import ErrorBoundary from './components/error/ErrorBoundary';
 import MainLayout from './components/main/MainLayout';
 import Core from './containers/base/Core';
+import EditUserProfilePage from './pages/account/EditUserProfilePage';
 import MainAccountPage from './pages/account/MainAccountPage';
 import MainDeliverablePage from './pages/deliverable/MainDeliverablePage';
 import LoginPage from './pages/LoginPage';
@@ -63,6 +64,14 @@ function App() {
               element={
                 <AuthenticatedRoute>
                   <MainAccountPage />
+                </AuthenticatedRoute>
+              }
+            />
+            <Route
+              path='account/edit-profile'
+              element={
+                <AuthenticatedRoute>
+                  <EditUserProfilePage />
                 </AuthenticatedRoute>
               }
             />
