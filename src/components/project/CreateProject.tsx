@@ -8,6 +8,8 @@ import FullInputWithLabel from '../common/FullInputWithLabel';
 import { setLayer } from '../../store/features/coreSlice';
 import { changeProjectCount } from '../../store/features/companySlice';
 import { ProjectState } from '../../modules/project';
+import { ClientState } from '../../modules/client';
+import { toast } from 'react-toastify';
 
 interface ICreateProjectForm {
   name: string;
@@ -18,9 +20,10 @@ type Props = {
   selectedProject?: ProjectState;
   onCancel: () => void;
   onSuccess: (project: ProjectState) => void;
+  selectedClient: ClientState | null;
 };
 
-const CreateProject = ({ value, selectedProject, onCancel, onSuccess }: Props) => {
+const CreateProject = ({ value, selectedProject, selectedClient, onCancel, onSuccess }: Props) => {
   const { user } = useSelector((state: RootState) => state.core);
   const { company_id } = useSelector((state: RootState) => state.companyInfo);
 
@@ -39,13 +42,18 @@ const CreateProject = ({ value, selectedProject, onCancel, onSuccess }: Props) =
     if (selectedProject) {
       _sendUpdateProject({ ...selectedProject, project_name: data.name, description: data.description });
     } else {
-      const params = {
-        project_id: null,
-        creator_id: user?.user_id,
-        project_name: data.name,
-        company_id,
-      };
-      params.creator_id && _sendCreateProject(params);
+      if (selectedClient?.client_id && user?.user_id) {
+        const params = {
+          project_id: null,
+          creator_id: user.user_id,
+          client_id: selectedClient.client_id,
+          project_name: data.name,
+          company_id,
+        };
+        params.creator_id && _sendCreateProject(params);
+      } else {
+        toast.error('please select client!');
+      }
     }
   };
   React.useEffect(() => {

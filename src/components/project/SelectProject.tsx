@@ -72,7 +72,7 @@ const SelectProject = ({ name, value, client, onChange, fieldRef, ...rest }: Sel
   }, [client]);
   React.useEffect(() => {
     if (sendProjectWithClientIdRes) {
-      setProjectList(sendProjectWithClientIdRes.project);
+      setProjectList(sendProjectWithClientIdRes.project.filter(project => project.client_id !== null));
       setIsLoading(false);
     }
   }, [sendProjectWithClientIdRes]);
@@ -142,7 +142,7 @@ const SelectProject = ({ name, value, client, onChange, fieldRef, ...rest }: Sel
         {...rest}
       />
       <ModalView isOpen={isCreate} onClose={() => setIsCreate(false)}>
-        <CreateProject value={inputValue} onCancel={onCancel} onSuccess={onSuccess} />
+        <CreateProject value={inputValue} onCancel={onCancel} onSuccess={onSuccess} selectedClient={client} />
       </ModalView>
     </div>
   );

@@ -17,7 +17,7 @@ type Props = {
   error: string | null;
 };
 function TaskForm({ onSubmit, error }: Props) {
-  const { handleSubmit, control, getValues } = useForm<TaskFormType>({
+  const { handleSubmit, control } = useForm<TaskFormType>({
     defaultValues: {
       client: null,
       project: null,
