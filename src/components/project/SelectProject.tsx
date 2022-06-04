@@ -16,7 +16,7 @@ import CreateProject from './CreateProject';
 const styles: StylesConfig<ProjectState> = {
   container: styles => ({ ...styles, width: '100%' }),
   control: styles => ({ ...styles, backgroundColor: 'transparent', width: '100%', border: 'none', boxShadow: 'none' }),
-  option: (styles, { data, isDisabled, isFocused, isSelected }) => {
+  option: (styles, { data, isDisabled, isSelected }) => {
     return {
       ...styles,
       backgroundColor: isSelected ? '#DD0000' : undefined,

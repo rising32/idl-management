@@ -8,11 +8,14 @@ import SelectProject from '../project/SelectProject';
 import { ProjectState } from '../../modules/project';
 import { TaskState } from '../../modules/task';
 import SelectTask from './SelectTask';
+import { UserInfoState } from '../../modules/user';
+import SelectMember from '../member/SelectMember';
 
 export type TaskFormType = {
   client: ClientState | null;
   project: ProjectState | null;
   task: TaskState | null;
+  member: UserInfoState | null;
 };
 
 type Props = {
@@ -25,6 +28,7 @@ function TaskForm({ onSubmit, error }: Props) {
       client: null,
       project: null,
       task: null,
+      member: null,
     },
   });
   const client = useWatch({
@@ -61,6 +65,14 @@ function TaskForm({ onSubmit, error }: Props) {
           rules={{ required: true }}
           render={({ field: { onChange, onBlur, name, value, ref } }) => (
             <SelectTask fieldRef={ref} name={name} onBlur={onBlur} project={project} onChange={onChange} value={value} />
+          )}
+        />
+        <Controller
+          control={control}
+          name='member'
+          rules={{ required: true }}
+          render={({ field: { onChange, onBlur, name, value, ref } }) => (
+            <SelectMember fieldRef={ref} name={name} onBlur={onBlur} onChange={onChange} value={value} />
           )}
         />
         <button

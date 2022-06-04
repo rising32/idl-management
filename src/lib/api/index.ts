@@ -4,6 +4,7 @@ import { CompanyInfoState } from '../../modules/company';
 import { SettingState } from '../../modules/core';
 import { ProjectState } from '../../modules/project';
 import { TaskState } from '../../modules/task';
+import { CompanyMemberState } from '../../modules/team';
 import { UserInfoState } from '../../modules/user';
 const host = process.env.REACT_APP_API_HOST;
 const apiClient = axios.create({
@@ -79,3 +80,9 @@ export const sendUpdateTask = (params: {
   is_active: boolean;
   is_deleted: number;
 }) => apiClient.post<TaskState>('/project/task/update', params);
+
+export const sendCompanyMembers = (user_id: number) =>
+  apiClient.post<{
+    owner_id: number;
+    member: CompanyMemberState[];
+  }>('/company/get_company_members', { user_id });
