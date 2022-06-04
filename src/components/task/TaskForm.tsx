@@ -6,10 +6,13 @@ import RoundedView from '../common/RoundedView';
 import SelectClient from '../client/SelectClient';
 import SelectProject from '../project/SelectProject';
 import { ProjectState } from '../../modules/project';
+import { TaskState } from '../../modules/task';
+import SelectTask from './SelectTask';
 
 export type TaskFormType = {
   client: ClientState | null;
   project: ProjectState | null;
+  task: TaskState | null;
 };
 
 type Props = {
@@ -21,11 +24,16 @@ function TaskForm({ onSubmit, error }: Props) {
     defaultValues: {
       client: null,
       project: null,
+      task: null,
     },
   });
   const client = useWatch({
     control,
     name: 'client',
+  });
+  const project = useWatch({
+    control,
+    name: 'project',
   });
 
   return (
@@ -47,30 +55,14 @@ function TaskForm({ onSubmit, error }: Props) {
             <SelectProject fieldRef={ref} name={name} onBlur={onBlur} client={client} onChange={onChange} value={value} />
           )}
         />
-        {/* <Controller
-            control={control}
-            name='email'
-            rules={{ required: true }}
-            render={({ field: { onChange, onBlur, name, value, ref } }) => (
-              <IconInput fieldRef={ref} onBlur={onBlur} name={name} onChange={onChange} placeholder='Enter Email' value={value} />
-            )}
-          />
-          <Controller
-            control={control}
-            name='password'
-            rules={{ required: true }}
-            render={({ field: { onChange, onBlur, name, value, ref } }) => (
-              <IconInput
-                fieldRef={ref}
-                onBlur={onBlur}
-                name={name}
-                onChange={onChange}
-                placeholder='Enter Password'
-                type='password'
-                value={value}
-              />
-            )}
-          /> */}
+        <Controller
+          control={control}
+          name='task'
+          rules={{ required: true }}
+          render={({ field: { onChange, onBlur, name, value, ref } }) => (
+            <SelectTask fieldRef={ref} name={name} onBlur={onBlur} project={project} onChange={onChange} value={value} />
+          )}
+        />
         <button
           type='submit'
           className='bg-white w-8 h-8 rounded-full shadow-xl items-center justify-center flex absolute bottom-4 right-4'

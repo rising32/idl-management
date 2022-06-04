@@ -3,6 +3,7 @@ import { ClientState, UserClientState } from '../../modules/client';
 import { CompanyInfoState } from '../../modules/company';
 import { SettingState } from '../../modules/core';
 import { ProjectState } from '../../modules/project';
+import { TaskState } from '../../modules/task';
 import { UserInfoState } from '../../modules/user';
 const host = process.env.REACT_APP_API_HOST;
 const apiClient = axios.create({
@@ -39,6 +40,42 @@ export const sendProjectWithClientId = (company_id: number, client_id: number) =
     project: ProjectState[];
   }>('/project/get/client_no_assign', { company_id, client_id });
 
-export const sendCreateProject = (params: { creator_id: number; project_name: string; company_id: number }) =>
+export const sendCreateProject = (params: { creator_id: number; project_name: string; company_id: number; client_id: number }) =>
   apiClient.post<ProjectState>('/project/create', params);
 export const sendUpdateProject = (params: ProjectState) => apiClient.post<ProjectState>('/project/update', params);
+
+export const sendTaskWithProjectId = (company_id: number, project_id: number) =>
+  apiClient.post<{ task: TaskState[] }>('/project/task/get_by_pna', { company_id, project_id });
+
+export const sendCreateTask = (params: {
+  task_id: null;
+  creator_id: number;
+  project_id?: number;
+  task_name: string;
+  description: string;
+  planned_start_date: string | null;
+  planned_end_date: string | null;
+  actual_start_date: string | null;
+  actual_end_date: string | null;
+  hourly_rate: number;
+  is_add_all: boolean;
+  is_active: boolean;
+  is_deleted: number;
+  company_id: number;
+}) => apiClient.post<{ task: TaskState }>('/project/task/create', params);
+
+export const sendUpdateTask = (params: {
+  task_id: number | null;
+  creator_id: number;
+  project_id: number | null;
+  task_name: string;
+  description: string | null;
+  planned_start_date: string | null;
+  planned_end_date: string | null;
+  actual_start_date: string | null;
+  actual_end_date: string | null;
+  hourly_rate: number;
+  is_add_all: boolean;
+  is_active: boolean;
+  is_deleted: number;
+}) => apiClient.post<TaskState>('/project/task/update', params);
