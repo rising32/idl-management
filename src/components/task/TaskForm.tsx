@@ -10,12 +10,15 @@ import { TaskState } from '../../modules/task';
 import SelectTask from './SelectTask';
 import { UserInfoState } from '../../modules/user';
 import SelectMember from '../member/SelectMember';
+import SelectDate from '../common/SelectDate';
 
 export type TaskFormType = {
   client: ClientState | null;
   project: ProjectState | null;
   task: TaskState | null;
+  deliverable: string;
   member: UserInfoState | null;
+  when: Date | null;
 };
 
 type Props = {
@@ -28,7 +31,9 @@ function TaskForm({ onSubmit, error }: Props) {
       client: null,
       project: null,
       task: null,
+      deliverable: '',
       member: null,
+      when: null,
     },
   });
   const client = useWatch({
@@ -69,11 +74,34 @@ function TaskForm({ onSubmit, error }: Props) {
         />
         <Controller
           control={control}
+          name='deliverable'
+          rules={{ required: false }}
+          render={({ field }) => (
+            <label className='w-full flex items-center px-2'>
+              <span>Deliverable:</span>
+              <input
+                type='text'
+                autoComplete='off'
+                className='ml-2 py-2 bg-transparent focus:outline-none focus:border-none flex border-none w-full'
+                placeholder='Enter Deliverable Name'
+                {...field}
+              />
+            </label>
+          )}
+        />
+        <Controller
+          control={control}
           name='member'
           rules={{ required: true }}
           render={({ field: { onChange, onBlur, name, value, ref } }) => (
             <SelectMember fieldRef={ref} name={name} onBlur={onBlur} onChange={onChange} value={value} />
           )}
+        />
+        <Controller
+          control={control}
+          name='when'
+          rules={{ required: true }}
+          render={({ field: { onChange, value, ref } }) => <SelectDate label='when' fieldRef={ref} onChange={onChange} value={value} />}
         />
         <button
           type='submit'
