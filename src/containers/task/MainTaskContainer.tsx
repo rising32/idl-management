@@ -1,27 +1,28 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { SubmitHandler } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
-import LoginForm, { LoginFormType } from '../../components/auth/LoginForm';
+import { useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 import WeekDayCalendar from '../../components/calendar/WeekDayCalendar';
 import TaskForm, { TaskFormType } from '../../components/task/TaskForm';
 import { getLocalDataString, validateEmail } from '../../lib/utils';
-import { ErrorResponse } from '../../lib/utils/errorTypes';
-import { useAppDispatch } from '../../store';
-import { setCompanyInfo } from '../../store/features/companySlice';
-import { setLayer, setSetting, setUser } from '../../store/features/coreSlice';
+import { RootState, useAppDispatch } from '../../store';
 
 function MainTaskContainer() {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [error, setError] = useState<null | string>(null);
 
+  const { user } = useSelector((state: RootState) => state.core);
+
   const onSelectDate = (date: Date) => {
     setSelectedDate(date);
   };
-  const navigate = useNavigate();
   const dipatch = useAppDispatch();
 
   const onSubmit: SubmitHandler<TaskFormType> = data => {
-    console.log(data);
+    if (user?.role_id === 3) {
+      toast.error('permission denied');
+      return;
+    }
   };
   return (
     <div className='grid gap-4'>

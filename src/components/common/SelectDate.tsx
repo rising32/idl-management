@@ -1,6 +1,6 @@
 import React, { LegacyRef, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { ClockSvg, HouseSvg } from '../../assets/svg';
+import { ClockSvg } from '../../assets/svg';
 import { getFormatDate } from '../../lib/utils';
 import { itemGrayStyle } from '../../lib/utils/commonStyle';
 import { RootState } from '../../store';
@@ -14,9 +14,9 @@ export interface SelectDateProps {
   onChange: (date: Date) => void;
 }
 
-const SelectDate = ({ label, value, onChange, fieldRef }: SelectDateProps) => {
+const SelectDate = ({ label, value, onChange }: SelectDateProps) => {
   const [show, setShow] = useState(false);
-  const { user, local } = useSelector((state: RootState) => state.core);
+  const { local } = useSelector((state: RootState) => state.core);
   const onClickWhen = (date: Date) => {
     onChange(date);
     setShow(false);
@@ -26,7 +26,7 @@ const SelectDate = ({ label, value, onChange, fieldRef }: SelectDateProps) => {
       <div className={itemGrayStyle}>
         <div className='uppercase mr-4'>{label + ':'}</div>
         <div onClick={() => setShow(!show)} className='flex flex-1 justify-between text-rouge'>
-          <div>{getFormatDate(value || new Date(), local)}</div>
+          {value ? <div>{getFormatDate(value, local)}</div> : <div />}
           <ClockSvg className='mr-2' />
         </div>
       </div>

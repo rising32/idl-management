@@ -14,3 +14,4 @@ export { ReactComponent as HouseSvg } from './house.svg';
 export { ReactComponent as Person3FillSvg } from './person.3.sequence.fill.svg';
 export { ReactComponent as ChevronDownCircleFillSvg } from './chevron.down.circle.fill.svg';
 export { ReactComponent as ClockSvg } from './clock.svg';
+export { ReactComponent as MinusSvg } from './minus.svg';

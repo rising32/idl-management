@@ -3,7 +3,7 @@ import { ClientState, UserClientState } from '../../modules/client';
 import { CompanyInfoState } from '../../modules/company';
 import { SettingState } from '../../modules/core';
 import { ProjectState } from '../../modules/project';
-import { TaskState } from '../../modules/task';
+import { CPMDState, TaskState } from '../../modules/task';
 import { CompanyMemberState } from '../../modules/team';
 import { UserInfoState } from '../../modules/user';
 const host = process.env.REACT_APP_API_HOST;
@@ -86,3 +86,11 @@ export const sendCompanyMembers = (user_id: number) =>
     owner_id: number;
     member: CompanyMemberState[];
   }>('/company/get_company_members', { user_id });
+
+interface UCTPParams {
+  member_id?: number;
+  client_id?: number;
+  project_id?: number;
+  planned_end_date?: Date;
+}
+export const sendTasksWithCPMD = (params: UCTPParams) => apiClient.post<CPMDState[]>('/project/task/get_ucpt', params);
