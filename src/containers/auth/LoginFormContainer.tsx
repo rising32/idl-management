@@ -14,7 +14,7 @@ function LoginFormContainer() {
   const [error, setError] = useState<null | string>(null);
 
   const navigate = useNavigate();
-  const dipatch = useAppDispatch();
+  const dispatch = useAppDispatch();
 
   const [_sendLogin, , sendLoginRes, sendLoginError] = useRequest(sendLogin);
   const [_sendSetting, , sendSettingRes] = useRequest(sendSetting);
@@ -29,7 +29,7 @@ function LoginFormContainer() {
       setError(error);
       return;
     }
-    dipatch(setLayer(true));
+    dispatch(setLayer(true));
     const params = {
       email: data.email,
       password: data.password,
@@ -39,11 +39,11 @@ function LoginFormContainer() {
 
   useEffect(() => {
     if (sendLoginRes) {
-      dipatch(setUser(sendLoginRes));
+      dispatch(setUser(sendLoginRes));
       _sendSetting({ user_id: sendLoginRes.user.user_id });
       _sendCompanyInfo({ user_id: sendLoginRes.user.user_id });
     }
-  }, [sendLoginRes, dipatch, navigate, _sendSetting, _sendCompanyInfo]);
+  }, [sendLoginRes, dispatch, navigate, _sendSetting, _sendCompanyInfo]);
   useEffect(() => {
     if (sendLoginError) {
       const data = sendLoginError?.response?.data as ErrorResponse;
@@ -52,20 +52,20 @@ function LoginFormContainer() {
   }, [sendLoginError]);
   useEffect(() => {
     if (sendSettingRes) {
-      dipatch(setSetting(sendSettingRes));
+      dispatch(setSetting(sendSettingRes));
     }
-  }, [sendSettingRes, dipatch]);
+  }, [sendSettingRes, dispatch]);
   useEffect(() => {
     if (sendCompanyInfoRes) {
-      dipatch(setCompanyInfo(sendCompanyInfoRes));
+      dispatch(setCompanyInfo(sendCompanyInfoRes));
     }
-  }, [sendCompanyInfoRes, dipatch]);
+  }, [sendCompanyInfoRes, dispatch]);
   useEffect(() => {
     if (sendSettingRes && sendCompanyInfoRes) {
       navigate('/tasks');
-      dipatch(setLayer(false));
+      dispatch(setLayer(false));
     }
-  }, [sendSettingRes, sendCompanyInfoRes, dipatch, navigate]);
+  }, [sendSettingRes, sendCompanyInfoRes, dispatch, navigate]);
   return <LoginForm onSubmit={onSubmit} error={error} />;
 }
 

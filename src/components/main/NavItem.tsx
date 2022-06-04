@@ -13,7 +13,7 @@ const NavItem = ({ item }: { item: NavProps }) => {
   const isActive = location.pathname.split('/')[1] === item.to.split('/')[1];
 
   return (
-    <NavLink to={item.to} className='flex flex-col items-center text-xs font-bold'>
+    <NavLink to={item.to} className='flex flex-col items-center text-xs'>
       <div className='flex items-center'>
         <img src={isActive ? item.active_image : item.inactive_image} alt='Logo' className='w-auto h-6' />
       </div>

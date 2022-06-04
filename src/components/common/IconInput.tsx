@@ -1,6 +1,5 @@
 import React, { LegacyRef } from 'react';
 import { PersonFillSvg } from '../../assets/svg';
-// import '../../lib/utils/otherStyle.css';
 
 type InputProps = React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
 

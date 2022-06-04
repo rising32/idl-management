@@ -1,43 +1,39 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Controller, useForm, SubmitHandler } from 'react-hook-form';
 import { PlusSvg } from '../../assets/svg';
-import { getLocalDataString } from '../../lib/utils';
-import WeekDayCalendar from '../calendar/WeekDayCalendar';
+import { ClientState } from '../../modules/client';
 import RoundedView from '../common/RoundedView';
+import SelectClient from '../client/SelectClient';
 
 export type TaskFormType = {
-  email: string;
+  client: ClientState | null;
   password: string;
 };
 
-function TaskForm() {
-  const [selectedDate, setSelectedDate] = useState(new Date());
-  const onSelectDate = (date: Date) => {
-    setSelectedDate(date);
-  };
+type Props = {
+  onSubmit: SubmitHandler<TaskFormType>;
+  error: string | null;
+};
+function TaskForm({ onSubmit, error }: Props) {
   const { handleSubmit, control } = useForm<TaskFormType>({
     defaultValues: {
-      email: '',
+      client: null,
       password: '',
     },
   });
 
-  const onSubmit: SubmitHandler<TaskFormType> = data => {
-    console.log(data);
-  };
   return (
-    <>
-      <WeekDayCalendar selectedDate={selectedDate} onSelectDate={onSelectDate} />
-
-      <div className='flex items-center p-4'>
-        <span className='flex-1 font-bold truncate'>{getLocalDataString(selectedDate)}</span>
-        <span>On time: 90%</span>
-      </div>
-
-      <RoundedView className='border-2 border-rouge bg-gray'>
-        <form onSubmit={handleSubmit(onSubmit)} className='text-white grid gap-4 mt-4 pb-12 relative'>
-          <div className='font-bold text-center'>Task with your account</div>
-          {/* <Controller
+    <RoundedView className='border-2 border-rouge bg-gray'>
+      <form onSubmit={handleSubmit(onSubmit)} className='text-white grid gap-4 mt-4 pb-12 relative'>
+        <Controller
+          control={control}
+          name='client'
+          rules={{ required: true }}
+          render={({ field: { onChange, onBlur, name, value, ref } }) => (
+            <SelectClient fieldRef={ref} name={name} onBlur={onBlur} placeholder='' onChange={onChange} value={value} />
+          )}
+        />
+        {/* <Controller
             control={control}
             name='email'
             rules={{ required: true }}
@@ -61,15 +57,14 @@ function TaskForm() {
               />
             )}
           /> */}
-          <button
-            type='submit'
-            className='bg-white w-8 h-8 rounded-full shadow-xl items-center justify-center flex absolute bottom-4 right-4'
-          >
-            <PlusSvg className='w-6 h-6 text-rouge' />
-          </button>
-        </form>
-      </RoundedView>
-    </>
+        <button
+          type='submit'
+          className='bg-white w-8 h-8 rounded-full shadow-xl items-center justify-center flex absolute bottom-4 right-4'
+        >
+          <PlusSvg className='w-6 h-6 text-rouge' />
+        </button>
+      </form>
+    </RoundedView>
   );
 }
 

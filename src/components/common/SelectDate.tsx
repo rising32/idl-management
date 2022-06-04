@@ -6,8 +6,6 @@ import { RootState } from '../../store';
 import FullCalendar from '../calendar/FullCalendar';
 import ModalView from './ModalView';
 
-type InputProps = React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
-
 export interface SelectDateProps {
   label: string;
   fieldRef: LegacyRef<HTMLInputElement>;
