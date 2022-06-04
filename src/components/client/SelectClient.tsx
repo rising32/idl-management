@@ -100,7 +100,7 @@ const SelectClient = ({ name, value, onChange, fieldRef, ...rest }: SelectClient
     setIsLoading(false);
   };
   return (
-    <div className='p-2'>
+    <div className='px-2'>
       <CreatableSelect<ClientState>
         isClearable
         ref={fieldRef}
@@ -114,6 +114,7 @@ const SelectClient = ({ name, value, onChange, fieldRef, ...rest }: SelectClient
         styles={clientStyles}
         onChange={handleChange}
         blurInputOnSelect
+        placeholder=''
         getNewOptionData={inputValue => ({
           client_id: 0,
           client_name: `Create new client "${inputValue}"`,

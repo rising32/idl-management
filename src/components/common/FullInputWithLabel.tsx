@@ -11,7 +11,7 @@ export interface LabelInputProps extends InputProps {
 const FullInputWithLabel = ({ label, fieldRef, ...rest }: LabelInputProps) => {
   return (
     <div className='block w-full mt-4'>
-      <span className="after:content-['*'] after:ml-0.5 after:text-rouge block uppercase">{label}</span>
+      <span className='block uppercase'>{label}</span>
 
       <input
         ref={fieldRef}

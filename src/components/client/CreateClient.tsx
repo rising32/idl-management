@@ -6,7 +6,6 @@ import { sendCreateClient, sendRegisterMyClient, sendUpdateClient } from '../../
 import { ClientState } from '../../modules/client';
 import { RootState, useAppDispatch } from '../../store';
 import FullInputWithLabel from '../common/FullInputWithLabel';
-import ModalView from '../common/ModalView';
 import { setLayer } from '../../store/features/coreSlice';
 import { changeClientCount } from '../../store/features/companySlice';
 
@@ -81,7 +80,7 @@ const CreateClient = ({ value, selectedClient, onCancel, onSuccess }: Props) => 
             fieldRef={ref}
             value={value}
             onChange={onChange}
-            placeholder='Enter Password'
+            placeholder='Enter Client Name'
           />
         )}
       />

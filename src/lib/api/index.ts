@@ -2,6 +2,7 @@ import axios from 'axios';
 import { ClientState, UserClientState } from '../../modules/client';
 import { CompanyInfoState } from '../../modules/company';
 import { SettingState } from '../../modules/core';
+import { ProjectState } from '../../modules/project';
 import { UserInfoState } from '../../modules/user';
 const host = process.env.REACT_APP_API_HOST;
 const apiClient = axios.create({
@@ -32,3 +33,12 @@ export const sendRegisterMyClient = (user_id: number, client_id: number, is_acti
   apiClient.post<UserClientState>('/admin/regist_my_client', { user_id, client_id, is_active });
 
 export const sendUpdateClient = (params: ClientState) => apiClient.post<ClientState>('/admin/update_client', params);
+
+export const sendProjectWithClientId = (company_id: number, client_id: number) =>
+  apiClient.post<{
+    project: ProjectState[];
+  }>('/project/get/client_no_assign', { company_id, client_id });
+
+export const sendCreateProject = (params: { creator_id: number; project_name: string; company_id: number }) =>
+  apiClient.post<ProjectState>('/project/create', params);
+export const sendUpdateProject = (params: ProjectState) => apiClient.post<ProjectState>('/project/update', params);
