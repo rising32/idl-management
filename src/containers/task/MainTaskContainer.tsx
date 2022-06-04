@@ -4,8 +4,8 @@ import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import WeekDayCalendar from '../../components/calendar/WeekDayCalendar';
 import TaskForm, { TaskFormType } from '../../components/task/TaskForm';
-import { getLocalDataString, validateEmail } from '../../lib/utils';
-import { RootState, useAppDispatch } from '../../store';
+import { getLocalDataString } from '../../lib/utils';
+import { RootState } from '../../store';
 
 function MainTaskContainer() {
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -16,13 +16,13 @@ function MainTaskContainer() {
   const onSelectDate = (date: Date) => {
     setSelectedDate(date);
   };
-  const dipatch = useAppDispatch();
 
   const onSubmit: SubmitHandler<TaskFormType> = data => {
     if (user?.role_id === 3) {
       toast.error('permission denied');
       return;
     }
+    console.log(data);
   };
   return (
     <div className='grid gap-4'>

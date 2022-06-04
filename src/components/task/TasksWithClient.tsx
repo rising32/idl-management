@@ -9,7 +9,7 @@ import { TaskFormType } from './TaskForm';
 import { setLayer } from '../../store/features/coreSlice';
 import RoundedView from '../common/RoundedView';
 import { sendTasksWithCPMD } from '../../lib/api';
-import { MinusSvg, PlusSvg } from '../../assets/svg';
+import { MinusSvg } from '../../assets/svg';
 
 interface Props {
   selectedWeek?: number;
