@@ -3,16 +3,16 @@ import { addWeeks, subWeeks } from 'date-fns';
 import { getWeekNumber } from '../../lib/utils';
 import { ArrowLeftSvg, ArrowRightSvg, CalendarSvg } from '../../assets/svg';
 import PageHeader from '../base/PageHeader';
+import { PriorityContext } from '../../containers/priority/MainPriorityContainer';
 
-interface Props {
-  onSelectWeek: (week: number) => void;
-}
-const WeekNumberCalendar = ({ onSelectWeek }: Props) => {
+const WeekNumberCalendar = () => {
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [currentWeek, setCurrentWeek] = useState(getWeekNumber(currentMonth));
 
+  const { state, update } = React.useContext(PriorityContext);
+
   React.useEffect(() => {
-    onSelectWeek(currentWeek);
+    update({ ...state, selectedWeek: currentWeek });
   }, [currentWeek]);
   const changeWeekHandle = (btnType: string) => {
     if (btnType === 'prev') {
