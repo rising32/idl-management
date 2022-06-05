@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { addWeeks, subWeeks } from 'date-fns';
 import { getWeekNumber } from '../../lib/utils';
 import { ArrowLeftSvg, ArrowRightSvg, CalendarSvg } from '../../assets/svg';
+import PageHeader from '../base/PageHeader';
 
 interface Props {
   onSelectWeek: (week: number) => void;
@@ -24,7 +25,7 @@ const WeekNumberCalendar = ({ onSelectWeek }: Props) => {
     }
   };
   return (
-    <div className='w-full flex flex-row justify-between items-center bg-white py-3 px-4 rounded-md text-button'>
+    <PageHeader className='py-3 px-4 text-button'>
       <div className='flex items-center justify-center' onClick={() => changeWeekHandle('prev')}>
         <ArrowLeftSvg className='w-4 h-4 ' />
         <div className='text-rouge pl-2'>{currentWeek - 1}</div>
@@ -38,7 +39,7 @@ const WeekNumberCalendar = ({ onSelectWeek }: Props) => {
         <div className='text-rouge pr-2'>{currentWeek + 1}</div>
         <ArrowRightSvg className='w-4 h-4' />
       </div>
-    </div>
+    </PageHeader>
   );
 };
 
