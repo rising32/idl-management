@@ -1,6 +1,6 @@
 import React, { LegacyRef, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { ClockSvg } from '../../assets/svg';
+import { CalendarSvg } from '../../assets/svg';
 import { getFormatDate } from '../../lib/utils';
 import { itemGrayStyle } from '../../lib/utils/commonStyle';
 import { RootState } from '../../store';
@@ -27,7 +27,7 @@ const SelectDate = ({ label, value, onChange }: SelectDateProps) => {
         <div className='uppercase mr-4'>{label + ':'}</div>
         <div onClick={() => setShow(!show)} className='flex flex-1 justify-between text-rouge'>
           {value ? <div>{getFormatDate(value, local)}</div> : <div />}
-          <ClockSvg className='mr-2' />
+          <CalendarSvg className='mr-2' />
         </div>
       </div>
       <ModalView isOpen={show}>
