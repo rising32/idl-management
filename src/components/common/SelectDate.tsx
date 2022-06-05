@@ -27,7 +27,7 @@ const SelectDate = ({ label, value, onChange }: SelectDateProps) => {
         <div className='uppercase mr-4'>{label + ':'}</div>
         <div onClick={() => setShow(!show)} className='flex flex-1 justify-between text-rouge'>
           {value ? <div>{getFormatDate(value, local)}</div> : <div />}
-          <CalendarSvg className='mr-2' />
+          <CalendarSvg className='w-4 h-4 mr-2' />
         </div>
       </div>
       <ModalView isOpen={show}>

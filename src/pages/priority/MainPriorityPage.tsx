@@ -1,10 +1,11 @@
 import React from 'react';
 import MainTemplate from '../../components/main/MainTemplate';
+import MainPriorityContainer from '../../containers/priority/MainPriorityContainer';
 
 function MainPriorityPage() {
   return (
     <MainTemplate>
-      <h1>MainPriorityPage</h1>
+      <MainPriorityContainer />
     </MainTemplate>
   );
 }
