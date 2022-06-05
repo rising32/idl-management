@@ -43,11 +43,11 @@ const WeekDayCalendar = ({ selectedDate, onSelectDate }: Props) => {
   return (
     <PageHeader>
       <div className='flex items-center justify-center' onClick={() => changeWeekHandle('prev')}>
-        <ArrowLeftSvg className='w-4 h-4 stroke-button stroke-2' />
+        <ArrowLeftSvg className='w-4 h-4 text-button' />
       </div>
       {getDates()}
       <div className='flex items-center justify-center' onClick={() => changeWeekHandle('next')}>
-        <ArrowRightSvg className='w-4 h-4 stroke-button stroke-2' />
+        <ArrowRightSvg className='w-4 h-4 text-button' />
       </div>
     </PageHeader>
   );

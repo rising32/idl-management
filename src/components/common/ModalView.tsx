@@ -13,7 +13,7 @@ function ModalView({ isOpen, children, onClose }: Props) {
     <ReactModal
       isOpen={isOpen}
       onRequestClose={onClose}
-      className='w-4/5 max-h-screen bg-white p-4 overflow-auto rounded-sm flex flex-col items-center justify-center'
+      className='w-4/5 max-h-screen bg-white overflow-auto rounded-sm flex flex-col items-center justify-center'
       style={{
         overlay: {
           display: 'flex',

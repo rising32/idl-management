@@ -11,7 +11,7 @@ const FullCalendar = ({ selectedDate, onSelectDate }: Props) => {
   const getHeader = () => {
     return (
       <div className='flex flex-row p-3 w-full items-center justify-between bg-rouge'>
-        <ArrowLeftSvg className='w-4 h-4 stroke-button stroke-2' onClick={() => setActiveDate(subMonths(activeDate, 1))} />
+        <ArrowLeftSvg className='w-4 h-4 text-button' onClick={() => setActiveDate(subMonths(activeDate, 1))} />
         <div
           className='font-normal text-white'
           onClick={() => {
@@ -22,7 +22,7 @@ const FullCalendar = ({ selectedDate, onSelectDate }: Props) => {
           Today
         </div>
         <div className='font-bold text-white'>{format(activeDate, 'MMMM yyyy')}</div>
-        <ArrowRightSvg className='w-4 h-4 stroke-button stroke-2' onClick={() => setActiveDate(addMonths(activeDate, 1))} />
+        <ArrowRightSvg className='w-4 h-4 text-button' onClick={() => setActiveDate(addMonths(activeDate, 1))} />
       </div>
     );
   };
@@ -92,7 +92,7 @@ const FullCalendar = ({ selectedDate, onSelectDate }: Props) => {
   };
 
   return (
-    <section className='w-full text-black'>
+    <section className='w-full text-black outline outline-1'>
       {getHeader()}
       {getWeekDaysNames()}
       {getDates()}
