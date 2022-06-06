@@ -1,13 +1,13 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import { PriorityContext, TABLIST } from '../../containers/priority/MainPriorityContainer';
 
 function PriorityTab() {
-  const navigate = useNavigate();
   const { state, update } = React.useContext(PriorityContext);
 
   const onSelectTab = (index: number) => {
-    if (state.selectedPriority) {
+    if (state.tab === TABLIST[index]) {
+      update({ ...state, tab: null });
+    } else {
       update({ ...state, tab: TABLIST[index] });
     }
   };
