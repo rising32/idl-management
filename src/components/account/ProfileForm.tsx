@@ -5,7 +5,7 @@ import { RootState } from '../../store';
 import { Controller, useForm, SubmitHandler, useWatch } from 'react-hook-form';
 import InputWithLabel from '../common/InputWithLabel';
 import { itemGrayStyle } from '../../lib/utils/commonStyle';
-import { getFormatDate, getLocalMonthList, getNickName } from '../../lib/utils';
+import { getLocalMonthList, getNickName } from '../../lib/utils';
 import { useNavigate } from 'react-router-dom';
 import SelectDate from '../common/SelectDate';
 
@@ -24,7 +24,7 @@ type Props = {
   error: string | null;
 };
 function ProfileForm({ onSubmit, error }: Props) {
-  const [billableSum, setBillableSum] = useState(240);
+  const [billableSum] = useState(240);
   const navigate = useNavigate();
 
   const { user, local } = useSelector((state: RootState) => state.core);
@@ -129,7 +129,7 @@ function ProfileForm({ onSubmit, error }: Props) {
           control={control}
           name='nick_name'
           rules={{ required: true }}
-          render={({ field: { onChange, onBlur, name, value, ref } }) => (
+          render={({ field: { value } }) => (
             <div className={itemGrayStyle}>
               <div className='uppercase mr-4'>{'nickname:'}</div>
               <div>{value}</div>
@@ -141,9 +141,7 @@ function ProfileForm({ onSubmit, error }: Props) {
           control={control}
           name='birthday'
           rules={{ required: true }}
-          render={({ field: { onChange, onBlur, name, value, ref } }) => (
-            <SelectDate label='birthday' fieldRef={ref} onChange={onChange} value={value} />
-          )}
+          render={({ field: { onChange, value, ref } }) => <SelectDate label='birthday' fieldRef={ref} onChange={onChange} value={value} />}
         />
         <div className={`font-bold ${itemGrayStyle}`}>
           <span className='uppercase mr-4'>{billableSum}</span>
@@ -153,7 +151,7 @@ function ProfileForm({ onSubmit, error }: Props) {
           control={control}
           name='billable_days'
           rules={{ required: true }}
-          render={({ field: { onChange, onBlur, name, value, ref } }) => (
+          render={({ field: { value } }) => (
             <div>
               {getLocalMonthList(local).map((month, index) => (
                 <div key={month} className='px-5 flex'>

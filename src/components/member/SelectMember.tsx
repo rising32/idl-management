@@ -4,7 +4,7 @@ import Select, { ControlProps, GroupBase, OnChangeValue, Props, StylesConfig, co
 import { sendCompanyMembers } from '../../lib/api';
 import useRequest from '../../lib/hooks/useRequest';
 import { UserInfoState } from '../../modules/user';
-import { RootState, useAppDispatch } from '../../store';
+import { RootState } from '../../store';
 
 const customStyles: StylesConfig<UserInfoState> = {
   container: styles => ({ ...styles, width: '100%' }),
@@ -44,8 +44,6 @@ const SelectMember = ({ name, value, onChange, fieldRef, ...rest }: SelectClient
   const [isLoading, setIsLoading] = useState(false);
 
   const { user } = useSelector((state: RootState) => state.core);
-  const { company_id } = useSelector((state: RootState) => state.companyInfo);
-  const dispatch = useAppDispatch();
 
   const [_sendCompanyMembers, , sendCompanyMembersRes] = useRequest(sendCompanyMembers);
 

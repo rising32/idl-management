@@ -5,7 +5,6 @@ type InputProps = React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputEle
 
 export interface LabelInputProps extends InputProps {
   label: string;
-  placeholder?: string;
   fieldRef: LegacyRef<HTMLInputElement>;
   name?: string;
   value?: string;
@@ -13,7 +12,7 @@ export interface LabelInputProps extends InputProps {
   disabled?: boolean;
 }
 
-const InputWithLabel = ({ label, name, value, placeholder, onChange, fieldRef, disabled, ...rest }: LabelInputProps) => {
+const InputWithLabel = ({ label, name, value, onChange, fieldRef, disabled, ...rest }: LabelInputProps) => {
   return (
     <div className={itemGrayStyle}>
       <div className='uppercase mr-4'>{label + ':'}</div>

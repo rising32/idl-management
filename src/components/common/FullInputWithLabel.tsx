@@ -1,5 +1,4 @@
 import React, { LegacyRef } from 'react';
-import { itemGrayStyle } from '../../lib/utils/commonStyle';
 
 type InputProps = React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
 
