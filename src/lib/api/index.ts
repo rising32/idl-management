@@ -2,6 +2,7 @@ import axios from 'axios';
 import { ClientState, UserClientState } from '../../modules/client';
 import { CompanyInfoState } from '../../modules/company';
 import { SettingState } from '../../modules/core';
+import { DeliverableState } from '../../modules/deliverable';
 import { ProjectState } from '../../modules/project';
 import { CPMDState, TaskState } from '../../modules/task';
 import { CompanyMemberState } from '../../modules/team';
@@ -107,3 +108,9 @@ export const sendPastNotAchievedPriorities = (user_id: number, week: number) =>
     user_id: number;
     priority: PriorityState[];
   }>('/priority/get/userid/week/before/not_completed', { user_id, week });
+
+export const sendDeliverablesWithPlanedDate = (user_id: number, planned_end_date: Date) =>
+  apiClient.post<{
+    user_id: number;
+    deliverable: DeliverableState[];
+  }>('/project/deliverable/get/planned_end_date', { user_id, planned_end_date });

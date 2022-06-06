@@ -1,10 +1,11 @@
 import React from 'react';
 import MainTemplate from '../../components/main/MainTemplate';
+import MainDeliverableContainer from '../../containers/deliverable/MainDeliverableContainer';
 
 function MainDeliverablePage() {
   return (
     <MainTemplate>
-      <h1>MainDeliverablePage</h1>
+      <MainDeliverableContainer />
     </MainTemplate>
   );
 }
