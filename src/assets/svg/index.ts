@@ -16,3 +16,5 @@ export { ReactComponent as ChevronDownCircleFillSvg } from './chevron.down.circl
 export { ReactComponent as ClockSvg } from './clock.svg';
 export { ReactComponent as MinusSvg } from './minus.svg';
 export { ReactComponent as CalendarSvg } from './calendar.svg';
+export { ReactComponent as RectangleFillOnRectangleFillSvg } from './rectangle.fill.on.rectangle.fill.svg';
+export { ReactComponent as XMarkSvg } from './xmark.svg';

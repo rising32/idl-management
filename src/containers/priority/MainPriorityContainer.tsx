@@ -1,5 +1,7 @@
 import React from 'react';
 import WeekNumberCalendar from '../../components/calendar/WeekNumberCalendar';
+import PastNotAchievedPriority from '../../components/priority/PastNotAchievedPriority';
+import PriorityForm from '../../components/priority/PriorityForm';
 import WeeklyPriorities from '../../components/priority/WeeklyPriorities';
 import { createCtx } from '../../lib/context/createCtx';
 import { getWeekNumber } from '../../lib/utils';
@@ -22,6 +24,8 @@ function MainPriorityContainer() {
     <PriorityProvider>
       <WeekNumberCalendar />
       <WeeklyPriorities />
+      <PriorityForm />
+      <PastNotAchievedPriority />
     </PriorityProvider>
   );
 }

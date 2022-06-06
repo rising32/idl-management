@@ -6,6 +6,7 @@ import { ProjectState } from '../../modules/project';
 import { CPMDState, TaskState } from '../../modules/task';
 import { CompanyMemberState } from '../../modules/team';
 import { UserInfoState } from '../../modules/user';
+import { PriorityState } from '../../modules/weekPriority';
 const host = process.env.REACT_APP_API_HOST;
 const apiClient = axios.create({
   baseURL: host,
@@ -94,3 +95,15 @@ interface UCTPParams {
   planned_end_date?: Date;
 }
 export const sendTasksWithCPMD = (params: UCTPParams) => apiClient.post<CPMDState[]>('/project/task/get_ucpt', params);
+
+export const sendPriorityByWeek = (user_id: number, week: number) =>
+  apiClient.post<{
+    user_id: number;
+    priority: PriorityState[];
+  }>('/priority/get/userid/week', { user_id, week });
+
+export const sendPastNotAchievedPriorities = (user_id: number, week: number) =>
+  apiClient.post<{
+    user_id: number;
+    priority: PriorityState[];
+  }>('/priority/get/userid/week/before/not_completed', { user_id, week });

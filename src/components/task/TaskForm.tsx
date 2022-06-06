@@ -51,7 +51,7 @@ function TaskForm({ onSubmit, error }: Props) {
 
   return (
     <>
-      <RoundedView className='border-2 border-rouge bg-gray'>
+      <RoundedView className='border-4 border-rouge bg-gray'>
         <form onSubmit={handleSubmit(onSubmit)} className='text-white mt-4 pb-12 relative'>
           <Controller
             control={control}

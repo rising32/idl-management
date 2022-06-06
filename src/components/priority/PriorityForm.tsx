@@ -10,7 +10,7 @@ import { setLayer } from '../../store/features/coreSlice';
 import RoundedView from '../common/RoundedView';
 import CompltedIcon from '../common/CompltedIcon';
 
-function WeeklyPriorities() {
+function PriorityForm() {
   const [weeklyPriorities, setWeeklyPriorities] = useState<PriorityState[]>([]);
   const [selectedPriority, setSelectedPriority] = useState<PriorityState | null>(null);
 
@@ -41,8 +41,8 @@ function WeeklyPriorities() {
 
   return (
     <div className='text-white mt-4'>
-      <div className='text-center'>Weekly priorities</div>
-      <RoundedView className='p-4 bg-gray'>
+      <div className='text-center'>Priority achieved this week with clear goal defined</div>
+      <RoundedView className='border-4 border-rouge bg-gray p-4'>
         <ul role='list'>
           {weeklyPriorities.length > 0 ? (
             weeklyPriorities.map((priority, index) => (
@@ -68,4 +68,4 @@ function WeeklyPriorities() {
   );
 }
 
-export default WeeklyPriorities;
+export default PriorityForm;
