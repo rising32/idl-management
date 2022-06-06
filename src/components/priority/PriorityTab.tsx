@@ -1,7 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { PriorityContext, TABLIST } from '../../containers/priority/MainPriorityContainer';
-import { PriorityState } from '../../modules/weekPriority';
 
 function PriorityTab() {
   const navigate = useNavigate();
