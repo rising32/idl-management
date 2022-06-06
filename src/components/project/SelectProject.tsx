@@ -78,7 +78,6 @@ const SelectProject = ({ name, value, client, onChange, fieldRef, ...rest }: Sel
   }, [sendProjectWithClientIdRes]);
 
   const handleChange = (newValue: OnChangeValue<ProjectState, false>) => {
-    console.log(newValue);
     onChange(newValue);
   };
   const handleCreate = (value: string) => {
