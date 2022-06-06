@@ -14,6 +14,7 @@ import SelectDate from '../common/SelectDate';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
 import TasksWithClient from './TasksWithClient';
+import InputWithLabel from '../common/InputWithLabel';
 
 export type TaskFormType = {
   client: ClientState | null;
@@ -80,18 +81,17 @@ function TaskForm({ onSubmit, error }: Props) {
           <Controller
             control={control}
             name='deliverable'
-            rules={{ required: false }}
-            render={({ field }) => (
-              <label className='w-full flex items-center px-2'>
-                <span>Deliverable:</span>
-                <input
-                  type='text'
-                  autoComplete='off'
-                  className='ml-2 py-2 bg-transparent focus:outline-none focus:border-none flex border-none w-full'
-                  placeholder='Enter Deliverable Name'
-                  {...field}
-                />
-              </label>
+            rules={{ required: true }}
+            render={({ field: { onChange, onBlur, name, value, ref } }) => (
+              <InputWithLabel
+                label='Deliverable'
+                fieldRef={ref}
+                onBlur={onBlur}
+                name={name}
+                onChange={onChange}
+                placeholder='Enter Deliverable Name'
+                value={value}
+              />
             )}
           />
           <Controller

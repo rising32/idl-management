@@ -9,62 +9,86 @@ import { RootState, useAppDispatch } from '../../store';
 import { setLayer } from '../../store/features/coreSlice';
 import RoundedView from '../common/RoundedView';
 import CompltedIcon from '../common/CompltedIcon';
+import { ClientState } from '../../modules/client';
+import { ProjectState } from '../../modules/project';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import InputWithLabel from '../common/InputWithLabel';
+import { PlusSvg } from '../../assets/svg';
+import PriorityTab from './PriorityTab';
+
+export interface IPriorityFormInput {
+  priority: string;
+  goal: string;
+  weekly: number;
+  client: ClientState | null;
+  project: ProjectState | null;
+}
 
 function PriorityForm() {
-  const [weeklyPriorities, setWeeklyPriorities] = useState<PriorityState[]>([]);
-  const [selectedPriority, setSelectedPriority] = useState<PriorityState | null>(null);
+  const { control, handleSubmit } = useForm<IPriorityFormInput>({
+    defaultValues: {
+      priority: '',
+      goal: '',
+      weekly: 1,
+      client: null,
+      project: null,
+    },
+  });
 
   const [_sendPriorityByWeek, , sendPriorityByWeekRes] = useRequest(sendPriorityByWeek);
   const dispatch = useAppDispatch();
   const { state } = React.useContext(PriorityContext);
   const { user } = useSelector((state: RootState) => state.core);
 
-  useEffect(() => {
-    dispatch(setLayer(true));
-    const user_id = user?.user_id;
-    const week = state.selectedWeek;
-    user_id && _sendPriorityByWeek(user_id, week);
-  }, [state.selectedWeek]);
-  useEffect(() => {
-    if (sendPriorityByWeekRes) {
-      setWeeklyPriorities(sendPriorityByWeekRes.priority);
-      dispatch(setLayer(false));
-    }
-  }, [sendPriorityByWeekRes]);
-  const onSelectPriority = (priority: PriorityState | null) => {
-    if (priority && selectedPriority?.wp_id !== priority.wp_id) {
-      setSelectedPriority(priority);
-    } else {
-      setSelectedPriority(null);
-    }
+  const onSubmit: SubmitHandler<IPriorityFormInput> = data => {
+    console.log(data);
   };
 
   return (
-    <div className='text-white mt-4'>
+    <form onSubmit={handleSubmit(onSubmit)} className='text-white mt-4'>
       <div className='text-center'>Priority achieved this week with clear goal defined</div>
-      <RoundedView className='border-4 border-rouge bg-gray p-4'>
-        <ul role='list'>
-          {weeklyPriorities.length > 0 ? (
-            weeklyPriorities.map((priority, index) => (
-              <li
-                key={priority.wp_id}
-                className={`flex items-center pb-2 first:pt-0 last:pb-0 ${
-                  selectedPriority?.wp_id === priority.wp_id ? 'text-rouge' : 'text-white'
-                }`}
-                onClick={() => onSelectPriority(priority)}
-              >
-                {state.selectedWeek !== getWeekNumber(new Date()) && (
-                  <CompltedIcon isSelected={selectedPriority?.wp_id === priority.wp_id} isCompleted={priority.is_completed === 1} />
-                )}
-                <div className='flex flex-1 overflow-hidden'>{index + 1 + ' : ' + priority.priority}</div>
-              </li>
-            ))
-          ) : (
-            <div>empty!</div>
+      <RoundedView className='border-4 border-rouge bg-gray p-4 pb-12 relative'>
+        <Controller
+          control={control}
+          name='priority'
+          rules={{ required: true }}
+          render={({ field: { onChange, onBlur, name, value, ref } }) => (
+            <InputWithLabel
+              label='priority'
+              fieldRef={ref}
+              onBlur={onBlur}
+              name={name}
+              onChange={onChange}
+              placeholder='Enter Priority Name'
+              value={value}
+            />
           )}
-        </ul>
+        />
+        <Controller
+          control={control}
+          name='goal'
+          rules={{ required: false }}
+          render={({ field: { onChange, onBlur, name, value, ref } }) => (
+            <InputWithLabel
+              label='goal'
+              fieldRef={ref}
+              onBlur={onBlur}
+              name={name}
+              onChange={onChange}
+              placeholder='Enter Goal'
+              value={value}
+            />
+          )}
+        />
+        <button
+          type='submit'
+          className='bg-white w-8 h-8 rounded-full shadow-xl items-center justify-center flex absolute bottom-4 right-4'
+        >
+          <PlusSvg className='w-6 h-6 text-rouge' />
+        </button>
+        <PriorityTab />
       </RoundedView>
-    </div>
+    </form>
   );
 }
 

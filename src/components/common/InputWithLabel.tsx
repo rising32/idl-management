@@ -15,7 +15,7 @@ export interface LabelInputProps extends InputProps {
 const InputWithLabel = ({ label, name, value, onChange, fieldRef, disabled, ...rest }: LabelInputProps) => {
   return (
     <div className={itemGrayStyle}>
-      <div className='uppercase mr-4'>{label + ':'}</div>
+      <div className='capitalize mr-2'>{label + ':'}</div>
       <input
         ref={fieldRef}
         name={name}

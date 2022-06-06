@@ -7,13 +7,17 @@ import { createCtx } from '../../lib/context/createCtx';
 import { getWeekNumber } from '../../lib/utils';
 import { PriorityState } from '../../modules/weekPriority';
 
+type PriorityTabType = 'DETAILS' | 'AGENDA' | 'PROJECT' | 'SUPPORT' | 'EXPENSES' | null;
+export const TABLIST: PriorityTabType[] = ['DETAILS', 'AGENDA', 'PROJECT', 'SUPPORT', 'EXPENSES'];
 interface PriorityInterface {
   selectedWeek: number;
-  newPriority: PriorityState | null;
+  selectedPriority: PriorityState | null;
+  tab: PriorityTabType;
 }
 const defaultPriorityInterface: PriorityInterface = {
   selectedWeek: getWeekNumber(new Date()),
-  newPriority: null,
+  selectedPriority: null,
+  tab: null,
 };
 
 const [ctx, PriorityProvider] = createCtx(defaultPriorityInterface);
