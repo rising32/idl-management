@@ -15,6 +15,8 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
 import TasksWithClient from './TasksWithClient';
 import InputWithLabel from '../common/InputWithLabel';
+import { TaskContext } from '../../containers/task/MainTaskContainer';
+import { getLocalDataString } from '../../lib/utils';
 
 export type TaskFormType = {
   client: ClientState | null;
@@ -27,10 +29,11 @@ export type TaskFormType = {
 
 type Props = {
   onSubmit: SubmitHandler<TaskFormType>;
-  error: string | null;
 };
-function TaskForm({ onSubmit, error }: Props) {
+function TaskForm({ onSubmit }: Props) {
   const { user } = useSelector((state: RootState) => state.core);
+  const { state, update } = React.useContext(TaskContext);
+
   const { handleSubmit, control } = useForm<TaskFormType>({
     defaultValues: {
       client: null,
@@ -51,7 +54,11 @@ function TaskForm({ onSubmit, error }: Props) {
   });
 
   return (
-    <>
+    <div className='text-white mt-4'>
+      <div className='flex justify-between px-2'>
+        <span className='truncate'>{getLocalDataString(state.selectedDate)}</span>
+        <span>On time: 90%</span>
+      </div>
       <RoundedView className='border-4 border-rouge bg-gray'>
         <form onSubmit={handleSubmit(onSubmit)} className='text-white mt-4 pb-12 relative'>
           <Controller
@@ -119,7 +126,7 @@ function TaskForm({ onSubmit, error }: Props) {
         </form>
       </RoundedView>
       <TasksWithClient control={control} />
-    </>
+    </div>
   );
 }
 

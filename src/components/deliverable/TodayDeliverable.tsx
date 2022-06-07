@@ -41,7 +41,7 @@ function TodayDeliverable() {
   return (
     <div className='text-white mt-4'>
       <div className='flex justify-between px-2'>
-        <span className='flex-1 truncate'>{getLocalDataString(state.selectedDate)}</span>
+        <span className='truncate'>{getLocalDataString(state.selectedDate)}</span>
         <span>90%</span>
       </div>
       <RoundedView className='p-4 bg-gray'>

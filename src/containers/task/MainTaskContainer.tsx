@@ -2,10 +2,20 @@ import React, { useState } from 'react';
 import { SubmitHandler } from 'react-hook-form';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
-import WeekDayCalendar from '../../components/calendar/WeekDayCalendar';
+import TaskCalendar from '../../components/task/TaskCalendar';
 import TaskForm, { TaskFormType } from '../../components/task/TaskForm';
-import { getLocalDataString } from '../../lib/utils';
+import { createCtx } from '../../lib/context/createCtx';
 import { RootState } from '../../store';
+
+interface TaskInterface {
+  selectedDate: Date;
+}
+const defaultTaskInterface: TaskInterface = {
+  selectedDate: new Date(),
+};
+
+const [ctx, TaskProvider] = createCtx(defaultTaskInterface);
+export const TaskContext = ctx;
 
 function MainTaskContainer() {
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -25,16 +35,10 @@ function MainTaskContainer() {
     console.log(data);
   };
   return (
-    <div className='grid gap-4'>
-      <WeekDayCalendar selectedDate={selectedDate} onSelectDate={onSelectDate} />
-
-      <div className='flex items-center'>
-        <span className='flex-1 font-bold truncate'>{getLocalDataString(selectedDate)}</span>
-        <span>On time: 90%</span>
-      </div>
-
-      <TaskForm onSubmit={onSubmit} error={error} />
-    </div>
+    <TaskProvider>
+      <TaskCalendar />
+      <TaskForm onSubmit={onSubmit} />
+    </TaskProvider>
   );
 }
 

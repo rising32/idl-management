@@ -1,5 +1,5 @@
 import React from 'react';
-import WeekNumberCalendar from '../../components/calendar/WeekNumberCalendar';
+import PriorityCalendar from '../../components/priority/PriorityCalendar';
 import PastNotAchievedPriority from '../../components/priority/PastNotAchievedPriority';
 import PriorityForm from '../../components/priority/PriorityForm';
 import WeeklyPriorities from '../../components/priority/WeeklyPriorities';
@@ -26,7 +26,7 @@ export const PriorityContext = ctx;
 function MainPriorityContainer() {
   return (
     <PriorityProvider>
-      <WeekNumberCalendar />
+      <PriorityCalendar />
       <WeeklyPriorities />
       <PriorityForm />
       <PastNotAchievedPriority />

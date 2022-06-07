@@ -3,13 +3,12 @@ import { format, startOfWeek, addDays, isSameDay } from 'date-fns';
 import { subDays } from 'date-fns/esm';
 import PageHeader from '../base/PageHeader';
 import { ArrowLeftSvg, ArrowRightSvg } from '../../assets/svg';
+import { TaskContext } from '../../containers/task/MainTaskContainer';
 
-interface Props {
-  selectedDate: Date;
-  onSelectDate: (selectedDate: Date) => void;
-}
-const WeekDayCalendar = ({ selectedDate, onSelectDate }: Props) => {
-  const [activeDate, setActiveDate] = useState(selectedDate);
+const TaskCalendar = () => {
+  const { state, update } = React.useContext(TaskContext);
+  const [activeDate, setActiveDate] = useState(state.selectedDate);
+
   const changeWeekHandle = (btnType: string) => {
     if (btnType === 'prev') {
       setActiveDate(subDays(activeDate, 7));
@@ -26,10 +25,10 @@ const WeekDayCalendar = ({ selectedDate, onSelectDate }: Props) => {
         <div
           key={format(addDays(weekStartDate, day), 'T')}
           className={`flex flex-1 flex-col w-full items-center justify-center ${
-            isSameDay(addDays(weekStartDate, day), selectedDate) ? 'text-rouge font-bold' : 'text-black'
+            isSameDay(addDays(weekStartDate, day), state.selectedDate) ? 'text-rouge font-bold' : 'text-black'
           }`}
           onClick={() => {
-            onSelectDate(addDays(weekStartDate, day));
+            update({ ...state, selectedDate: addDays(weekStartDate, day) });
           }}
         >
           <div>{format(addDays(weekStartDate, day), 'EEEEE')}</div>
@@ -53,4 +52,4 @@ const WeekDayCalendar = ({ selectedDate, onSelectDate }: Props) => {
   );
 };
 
-export default WeekDayCalendar;
+export default TaskCalendar;

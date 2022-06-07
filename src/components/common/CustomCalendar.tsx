@@ -6,7 +6,7 @@ interface Props {
   selectedDate: Date;
   onSelectDate: (selectedDate: Date) => void;
 }
-const FullCalendar = ({ selectedDate, onSelectDate }: Props) => {
+const CustomCalendar = ({ selectedDate, onSelectDate }: Props) => {
   const [activeDate, setActiveDate] = useState(new Date());
   const getHeader = () => {
     return (
@@ -100,4 +100,4 @@ const FullCalendar = ({ selectedDate, onSelectDate }: Props) => {
   );
 };
 
-export default FullCalendar;
+export default CustomCalendar;

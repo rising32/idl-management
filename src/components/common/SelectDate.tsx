@@ -4,7 +4,7 @@ import { CalendarSvg } from '../../assets/svg';
 import { getFormatDate } from '../../lib/utils';
 import { itemGrayStyle } from '../../lib/utils/commonStyle';
 import { RootState } from '../../store';
-import FullCalendar from '../calendar/FullCalendar';
+import CustomCalendar from './CustomCalendar';
 import ModalView from './ModalView';
 
 export interface SelectDateProps {
@@ -31,7 +31,7 @@ const SelectDate = ({ label, value, onChange }: SelectDateProps) => {
         </div>
       </div>
       <ModalView isOpen={show}>
-        <FullCalendar selectedDate={value || new Date()} onSelectDate={onClickWhen} />
+        <CustomCalendar selectedDate={value || new Date()} onSelectDate={onClickWhen} />
       </ModalView>
     </>
   );

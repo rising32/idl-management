@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { addWeeks, subWeeks } from 'date-fns';
 import { getWeekNumber } from '../../lib/utils';
 import { ArrowLeftSvg, ArrowRightSvg, CalendarSvg } from '../../assets/svg';
 import PageHeader from '../base/PageHeader';
 import { PriorityContext } from '../../containers/priority/MainPriorityContainer';
 
-const WeekNumberCalendar = () => {
+const PriorityCalendar = () => {
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [currentWeek, setCurrentWeek] = useState(getWeekNumber(currentMonth));
 
-  const { state, update } = React.useContext(PriorityContext);
+  const { state, update } = useContext(PriorityContext);
 
-  React.useEffect(() => {
+  useEffect(() => {
     update({ ...state, selectedWeek: currentWeek });
   }, [currentWeek]);
   const changeWeekHandle = (btnType: string) => {
@@ -43,4 +43,4 @@ const WeekNumberCalendar = () => {
   );
 };
 
-export default WeekNumberCalendar;
+export default PriorityCalendar;
