@@ -180,22 +180,21 @@ function StatisticsTable(): JSX.Element {
   const renderTable = () => {
     if (!tableHeaderData) return;
     return (
-      <div className='flex'>
+      <ul className='flex border-2 border-b-0'>
         {tableHeaderData.map((item, j) => (
-          <div key={j} className='flex flex-1 outline outline-1 outline-white items-center justify-center rotate-180 py-2'>
-            <div
-              key={j + item.value}
-              className='flex capitalize'
-              style={{
-                writingMode: 'vertical-lr',
-                textOrientation: 'mixed',
-              }}
-            >
-              {item.value}
-            </div>
-          </div>
+          <li
+            key={j}
+            className='flex flex-1 items-center justify-center rotate-180 py-2 capitalize'
+            style={{
+              borderRightWidth: j === 0 ? 0 : 1,
+              writingMode: 'vertical-lr',
+              textOrientation: 'mixed',
+            }}
+          >
+            {item.value}
+          </li>
         ))}
-      </div>
+      </ul>
     );
   };
 
@@ -204,22 +203,26 @@ function StatisticsTable(): JSX.Element {
       {state.Index === 'WEEK' && <span className=''>My Production</span>}
       {state.Index === 'MONTH' && <span className=''>My forecast</span>}
       {tableData && (
-        <div className='border-2 border-white text-sm'>
+        <div className='text-sm'>
           {renderTable()}
-          <div className='outline outline-1 outline-white'>
+          <div className='border-2'>
             {tableData.map((rowData, i) => (
-              <div key={i} className='flex'>
+              <ul key={i} className='flex'>
                 {rowData.map((item, j) => (
-                  <div
+                  <li
                     key={i + j}
-                    className={`flex flex-1 outline outline-1 outline-gray items-center justify-center py-1 ${
-                      item.colomn === 0 ? 'bg-transparent text-white' : 'bg-white text-black'
+                    className={`flex flex-1 items-center justify-center py-1 capitalize ${
+                      item.colomn === 0 ? 'bg-transparent text-white border-white' : 'bg-white text-black border-gray'
                     }`}
+                    style={{
+                      borderRightWidth: j === rowData.length - 1 ? 0 : 1,
+                      borderBottomWidth: i === tableData.length - 1 ? 0 : 1,
+                    }}
                   >
                     {item.value}
-                  </div>
+                  </li>
                 ))}
-              </div>
+              </ul>
             ))}
           </div>
         </div>
