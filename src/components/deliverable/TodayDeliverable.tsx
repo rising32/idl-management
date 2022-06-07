@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { PriorityContext } from '../../containers/priority/MainPriorityContainer';
 import { sendDeliverablesWithPlanedDate } from '../../lib/api';
 import useRequest from '../../lib/hooks/useRequest';
-import { getLocalDataString, getWeekNumber } from '../../lib/utils';
-import { PriorityState } from '../../modules/weekPriority';
+import { getLocalDataString } from '../../lib/utils';
 import { RootState, useAppDispatch } from '../../store';
 import { setLayer } from '../../store/features/coreSlice';
 import RoundedView from '../common/RoundedView';
-import CompltedIcon from '../common/CompltedIcon';
 import { DeliverableContext } from '../../containers/deliverable/MainDeliverableContainer';
 import { DeliverableState } from '../../modules/deliverable';
 import { format } from 'date-fns';

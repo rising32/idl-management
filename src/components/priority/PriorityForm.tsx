@@ -1,9 +1,5 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { PriorityContext } from '../../containers/priority/MainPriorityContainer';
-import { sendPriorityByWeek } from '../../lib/api';
-import useRequest from '../../lib/hooks/useRequest';
-import { RootState, useAppDispatch } from '../../store';
 import RoundedView from '../common/RoundedView';
 import { ClientState } from '../../modules/client';
 import { ProjectState } from '../../modules/project';
@@ -35,11 +31,7 @@ function PriorityForm() {
     },
   });
 
-  const [_sendPriorityByWeek, , sendPriorityByWeekRes] = useRequest(sendPriorityByWeek);
-  const dispatch = useAppDispatch();
   const { state } = React.useContext(PriorityContext);
-  const { user } = useSelector((state: RootState) => state.core);
-
   const client = useWatch({
     control,
     name: 'client',
