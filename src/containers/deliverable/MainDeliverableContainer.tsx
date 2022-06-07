@@ -3,8 +3,6 @@ import BeforePriorities from '../../components/deliverable/BeforePriorities';
 import DeliverableCalendar from '../../components/deliverable/DeliverableCalendar';
 import DeliverableForm from '../../components/deliverable/DeliverableForm';
 import TodayDeliverable from '../../components/deliverable/TodayDeliverable';
-import PastNotAchievedPriority from '../../components/priority/PastNotAchievedPriority';
-import PriorityForm from '../../components/priority/PriorityForm';
 import { createCtx } from '../../lib/context/createCtx';
 import { DeliverableState } from '../../modules/deliverable';
 import { PriorityState } from '../../modules/weekPriority';
