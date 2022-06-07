@@ -16,7 +16,7 @@ type TableItemType = {
 function StatisticsTable(): JSX.Element {
   const [tableData, setTableDate] = useState<TableItemType[][] | null>(null);
   const [tableHeaderData, setTableHeaderDate] = useState<TableItemType[] | null>(null);
-  const { state, update } = React.useContext(StatisticsContext);
+  const { state } = React.useContext(StatisticsContext);
 
   const { user } = useSelector((state: RootState) => state.core);
   const dispatch = useAppDispatch();
@@ -203,9 +203,9 @@ function StatisticsTable(): JSX.Element {
     <div className='mt-4 text-center'>
       {state.Index === 'WEEK' && <span className=''>My Production</span>}
       {state.Index === 'MONTH' && <span className=''>My forecast</span>}
-      <div className='border-2 border-white text-sm'>
-        {renderTable()}
-        {tableData && (
+      {tableData && (
+        <div className='border-2 border-white text-sm'>
+          {renderTable()}
           <div className='outline outline-1 outline-white'>
             {tableData.map((rowData, i) => (
               <div key={i} className='flex'>
@@ -222,8 +222,8 @@ function StatisticsTable(): JSX.Element {
               </div>
             ))}
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 }
