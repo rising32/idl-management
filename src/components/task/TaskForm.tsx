@@ -32,7 +32,7 @@ type Props = {
 };
 function TaskForm({ onSubmit }: Props) {
   const { user } = useSelector((state: RootState) => state.core);
-  const { state, update } = React.useContext(TaskContext);
+  const { state } = React.useContext(TaskContext);
 
   const { handleSubmit, control } = useForm<TaskFormType>({
     defaultValues: {

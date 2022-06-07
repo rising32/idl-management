@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { SubmitHandler } from 'react-hook-form';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
@@ -18,14 +18,7 @@ const [ctx, TaskProvider] = createCtx(defaultTaskInterface);
 export const TaskContext = ctx;
 
 function MainTaskContainer() {
-  const [selectedDate, setSelectedDate] = useState(new Date());
-  const [error, setError] = useState<null | string>(null);
-
   const { user } = useSelector((state: RootState) => state.core);
-
-  const onSelectDate = (date: Date) => {
-    setSelectedDate(date);
-  };
 
   const onSubmit: SubmitHandler<TaskFormType> = data => {
     if (user?.role_id === 3) {
