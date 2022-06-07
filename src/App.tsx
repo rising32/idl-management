@@ -11,7 +11,7 @@ import MainDeliverablePage from './pages/deliverable/MainDeliverablePage';
 import LoginPage from './pages/LoginPage';
 import MainPriorityPage from './pages/priority/MainPriorityPage';
 import RegisterPage from './pages/RegisterPage';
-import MainStatisticPage from './pages/statistic/MainStatisticPage';
+import StatisticsPage from './pages/statistics/StatisticsPage';
 import MainTaskPage from './pages/task/MainTaskPage';
 
 function App() {
@@ -55,7 +55,7 @@ function App() {
               path='statistics'
               element={
                 <AuthenticatedRoute>
-                  <MainStatisticPage />
+                  <StatisticsPage />
                 </AuthenticatedRoute>
               }
             />

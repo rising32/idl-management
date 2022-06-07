@@ -3,7 +3,7 @@ import { ClientState, UserClientState } from '../../modules/client';
 import { CompanyInfoState } from '../../modules/company';
 import { SettingState } from '../../modules/core';
 import { DeliverableState } from '../../modules/deliverable';
-import { ProjectState } from '../../modules/project';
+import { ProjectState, StatisticTableState } from '../../modules/project';
 import { CPMDState, TaskState } from '../../modules/task';
 import { CompanyMemberState } from '../../modules/team';
 import { UserInfoState } from '../../modules/user';
@@ -114,3 +114,8 @@ export const sendDeliverablesWithPlanedDate = (user_id: number, planned_end_date
     user_id: number;
     deliverable: DeliverableState[];
   }>('/project/deliverable/get/planned_end_date', { user_id, planned_end_date });
+
+export const sendWeekStaticsticsData = (user_id: number) =>
+  apiClient.post<{ data: StatisticTableState[] }>('/project/get_real_workdays/week/client', { user_id });
+export const sendMonthStaticsticsData = (user_id: number) =>
+  apiClient.post<{ data: StatisticTableState[] }>('/project/get_real_workdays/month/client', { user_id });
