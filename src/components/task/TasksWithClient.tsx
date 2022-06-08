@@ -10,6 +10,7 @@ import { setLayer } from '../../store/features/coreSlice';
 import RoundedView from '../common/RoundedView';
 import { sendTasksWithCPMD } from '../../lib/api';
 import { MinusSvg } from '../../assets/svg';
+import CompltedIcon from '../common/CompltedIcon';
 
 interface Props {
   selectedWeek?: number;
@@ -54,6 +55,7 @@ function TasksWithClient({ selectedWeek, control }: Props) {
   useEffect(() => {
     if (sendTasksWithCPMDRes) {
       setTaskList(sendTasksWithCPMDRes);
+      console.log(sendTasksWithCPMDRes);
       dispatch(setLayer(false));
     }
   }, [sendTasksWithCPMDRes]);
@@ -67,10 +69,8 @@ function TasksWithClient({ selectedWeek, control }: Props) {
               <span className='font-bold mb-2 text-center'>{item.client_name}</span>
               {item.task.map(task => (
                 <div key={task.task_id} className='flex items-center'>
-                  {/* <SelectedAndCompltedIcon isSelected={false} isCompleted={false} /> */}
-                  <span className='pl-2 truncate'>
-                    {getShortName(task.member_name) + '-' + 'W' + selectedWeek + ' : ' + task.task_name}
-                  </span>
+                  <CompltedIcon isSelected={false} isCompleted={false} />
+                  <span className='pl-2 truncate'>{task.member_name + '-' + 'W' + selectedWeek + ' : ' + task.task_name}</span>
                 </div>
               ))}
             </div>
