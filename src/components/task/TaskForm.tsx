@@ -125,7 +125,7 @@ function TaskForm({ onSubmit }: Props) {
           )}
         </form>
       </RoundedView>
-      <TasksWithClient control={control} />
+      {/* <TasksWithClient control={control} /> */}
     </div>
   );
 }
