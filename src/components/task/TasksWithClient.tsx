@@ -61,17 +61,20 @@ function TasksWithClient({ selectedWeek, control }: Props) {
     <>
       <div className='mt-4 text-center'>{'Tasks Week ' + getWeekNumber(when || new Date())}</div>
       <RoundedView className='p-4 bg-gray text-white pb-12 relative'>
-        {taskList.map(item => (
-          <div key={item.client_id} className='flex flex-col mb-3'>
-            <span className='font-bold mb-2 text-center'>{item.client_name}</span>
-            {item.task.map(task => (
-              <div key={task.task_id} className='flex items-center'>
-                {/* <SelectedAndCompltedIcon isSelected={false} isCompleted={false} /> */}
-                <span className='pl-2 truncate'>{getShortName(task.member_name) + '-' + 'W' + selectedWeek + ' : ' + task.task_name}</span>
-              </div>
-            ))}
-          </div>
-        ))}
+        {taskList.length > 0 &&
+          taskList.map(item => (
+            <div key={item.client_id} className='flex flex-col mb-3'>
+              <span className='font-bold mb-2 text-center'>{item.client_name}</span>
+              {item.task.map(task => (
+                <div key={task.task_id} className='flex items-center'>
+                  {/* <SelectedAndCompltedIcon isSelected={false} isCompleted={false} /> */}
+                  <span className='pl-2 truncate'>
+                    {getShortName(task.member_name) + '-' + 'W' + selectedWeek + ' : ' + task.task_name}
+                  </span>
+                </div>
+              ))}
+            </div>
+          ))}
         {taskList.length > 0 && (
           <div className='bg-white w-8 h-8 rounded-full shadow-xl items-center justify-center flex absolute bottom-4 right-4'>
             <MinusSvg className='w-6 h-6 text-rouge' />
